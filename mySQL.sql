@@ -1,4 +1,5 @@
 
+
 UNLOCK TABLES;
 /* If a table named countries is found it is removed with the data permanently from the database.*/
 DROP TABLE IF EXISTS `countries`;
@@ -48,7 +49,11 @@ DROP TABLE IF EXISTS `departments`;
 
 CREATE TABLE `departments` (
 
-/*The decimal number ranges from  */
+/*DECIMAL(M,D). M represents the max number of digits. D represents the number of digits to the right of the decimal point.
+ Values for DECIMAL columns are stored using a binary format that packs nine decimal digits into 4 bytes. 
+ The storage requirements for the integer and fractional parts of each value are determined separately. 
+ Each multiple of nine digits requires 4 bytes, and any remaining digits left over require some fraction of 4 bytes. 
+ The storage required for remaining digits is given by the following table.*/
 
 `DEPARTMENT_ID` decimal(4,0) NOT NULL DEFAULT '0',
 `DEPARTMENT_NAME` varchar(30) NOT NULL,
@@ -86,6 +91,10 @@ CREATE TABLE `employees`(
 `MANAGER_ID` decimal(6,0) DEFAULT NULL,
 `DEPARTMENT_ID` decimal(4,0) DEFAULT NULL,
 PRIMARY KEY (`EMPLOYEE_ID`),
+
+/*Creating a unique constraint on a column automatically creates a unique index.
+Server implements the integrity requirement of the unique contraint. */
+
 UNIQUE KEY `EMP_EMAIL_UK` (`EMAIL`),
 KEY `EMP_DEPARTMENT_IX` (`DEPARTMENT_ID`),
 KEY `EMP__JOB_IX` (`JOB_ID`),
@@ -169,4 +178,5 @@ UNIQUE KEY `sss` (`REGION_NAME`)
 LOCK TABLES `regions` WRITE;
 INSERT INTO `regions` VALUES (1,'Europe\r'),(2,'Americas\r'),(3,'Asia\r'),(4,'Middle East and Africa\r');
 UNLOCK TABLES;
+
 
