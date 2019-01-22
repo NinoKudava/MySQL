@@ -15,3 +15,9 @@ SELECT first_name, last_name, hire_date FROM employees WHERE YEAR(hire_date) LIK
 
 SELECT last_name FROM employees WHERE last_name = (len(last_name) = 6);
 SELECT last_name FROM employees WHERE last_name LIKE '------' AND first_name LIKE '--e%';
+
+SELECT job_id, COUNT(*) FROM employees GROUP BY job_id;
+
+SELECT manager_id, MIN(salary) FROM employees WHERE manager_id IS NOT NULL GROUP BY manager_id ORDER BY MIN(salary) DESC;
+
+SELECT job_id, AVG(salary) FROM employees WHERE job_id <> 'IT_PROG' GROUP BY job_id;
